@@ -11,6 +11,32 @@ public class Player : MonoBehaviour{
     private bool isWalking;
     private Vector3 lastInteractDir;
 
+    private void Start() {
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e) {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if (moveDir != Vector3.zero) { // if direction isnt 0 will contain last movement direction
+            lastInteractDir = moveDir; // even if we stop moving we will still use last movement direction for interact
+        }
+
+        float interactDistance = 2;
+        //if we hit something: // can also use raycastall if need an array of objects behind eachother
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask)) { //origin, direction, raycast hit, distance  (RC go to definition)
+            //Debug.Log(raycastHit.transform); //will see on the console if we hit sth
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) { //if interact hits ClearCounter
+                clearCounter.Interact();
+            }
+
+        }
+        else {
+            Debug.Log("-");
+        }
+    }
+
     private void Update(){
         HandleMovement();
         HandleInteractions();
@@ -34,7 +60,7 @@ public class Player : MonoBehaviour{
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask)) { //origin, direction, raycast hit, distance  (RC go to definition)
             //Debug.Log(raycastHit.transform); //will see on the console if we hit sth
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) { //if interact hits ClearCounter
-                clearCounter.Interact();
+                //clearCounter.Interact();
             }
 
         }

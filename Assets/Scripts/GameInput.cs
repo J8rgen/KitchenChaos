@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,24 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {
 
+    public event EventHandler OnInteractAction;
+
 
     private PlayerInputActions playerInputActions;
 
     private void Awake() {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
+
+        playerInputActions.Player.Interact.performed += Interact_performed; //performed event, interact_performed listener function
     }
 
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnInteractAction?.Invoke(this, EventArgs.Empty); // if there are subscribers same as following
+        //if (OnInteractAction != null) { // if there are subscribers
+        //    OnInteractAction(this, EventArgs.Empty);}
+        
+    }
 
     public Vector2 GetMovementVectorNormalized() {
 
