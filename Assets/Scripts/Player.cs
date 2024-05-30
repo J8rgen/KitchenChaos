@@ -6,13 +6,46 @@ public class Player : MonoBehaviour{
 
     [SerializeField] private float moveSpeed = 7f; // [SerializeField] makes it editable in the editor under player in inspect
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask countersLayerMask;
 
     private bool isWalking;
+    private Vector3 lastInteractDir;
 
     private void Update(){
+        HandleMovement();
+        HandleInteractions();
+    }
+
+    public bool IsWalking() {
+        return isWalking;
+    }
+
+    private void HandleInteractions() {
 
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
+        if (moveDir != Vector3.zero) { // if direction isnt 0 will contain last movement direction
+            lastInteractDir = moveDir; // even if we stop moving we will still use last movement direction for interact
+        }
+
+        float interactDistance = 2;
+        //if we hit something: // can also use raycastall if need an array of objects behind eachother
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask)) { //origin, direction, raycast hit, distance  (RC go to definition)
+            //Debug.Log(raycastHit.transform); //will see on the console if we hit sth
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) { //if interact hits ClearCounter
+                clearCounter.Interact();
+            }
+
+        }
+        else {
+            Debug.Log("-");
+        }
+    }
+
+    private void HandleMovement() {
+
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
         //for collision check
@@ -25,7 +58,7 @@ public class Player : MonoBehaviour{
 
 
         //diagonal movement against objects
-        if (!canMove) { 
+        if (!canMove) {
             // Cannot move towards moveDir
 
             //Attempt only X movement
@@ -68,10 +101,6 @@ public class Player : MonoBehaviour{
         float roateSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * roateSpeed); // with rotations use sleop, positions use lerp (takes a;b; t; choses a/b o inbweteen according to t value 0-1)
 
-    }
-
-    public bool IsWalking() {
-        return isWalking;
     }
 
 }
