@@ -6,30 +6,30 @@ public class KitchenObject : MonoBehaviour{
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
-    private ClearCounter clearCounter;
+    private IKitchenObjectParent kitchenObjectParent;
 
     public KitchenObjectSO GetKitchenObjectSO() {
         return kitchenObjectSO; 
     }
 
 
-    public void SetClearCounter(ClearCounter clearCounter) { // when we set clear counter to a different one    
-        if (this.clearCounter != null) {
-            this.clearCounter.ClearKitchenObject();
+    public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) { // when we set clear counter to a different one    
+        if (this.kitchenObjectParent != null) {
+            this.kitchenObjectParent.ClearKitchenObject();
         }
 
-        this.clearCounter = clearCounter; //CAREFUL HERE WITH OLD AND NEW CLEAR COUNTER
+        this.kitchenObjectParent = kitchenObjectParent; //CAREFUL HERE WITH OLD AND NEW CLEAR COUNTER
 
-        if (clearCounter.HasKitchenObject()) {
-            Debug.LogError("Counter already has a KitchenObject");
+        if (kitchenObjectParent.HasKitchenObject()) {
+            Debug.LogError("IKitchenObjectParent already has a KitchenObject");
         }
-        clearCounter.SetKitchenObject(this);
+        kitchenObjectParent.SetKitchenObject(this);
 
-        transform.parent = clearCounter.GetKitchenObjectFollowTransform(); // will teleport the items after setting different one
+        transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform(); // will teleport the items after setting different one
         transform.localPosition = Vector3.zero;
     }
 
-    public ClearCounter GetClearCounter() {
-        return clearCounter;
+    public IKitchenObjectParent GetKitchenObjectParent() {
+        return kitchenObjectParent;
     }
 }
