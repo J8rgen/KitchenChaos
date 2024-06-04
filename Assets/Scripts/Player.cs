@@ -10,7 +10,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent{
 
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged; //generics
     public class OnSelectedCounterChangedEventArgs : EventArgs {
-        public ClearCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
 
     [SerializeField] private float moveSpeed = 7f; // [SerializeField] makes it editable in the editor under player in inspect
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent{
 
     private bool isWalking;
     private Vector3 lastInteractDir;
-    private ClearCounter selectedCounter;
+    private BaseCounter selectedCounter;
     private KitchenObject kitchenObject;
 
     private void Awake() {
@@ -62,15 +62,14 @@ public class Player : MonoBehaviour, IKitchenObjectParent{
         float interactDistance = 2;
         //if we hit something: // can also use raycastall if need an array of objects behind eachother
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask)) { //origin, direction, raycast hit, distance  (RC go to definition)
-            //Debug.Log(raycastHit.transform); //will see on the console if we hit sth
 
             //if interact hits ClearCounter
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) { 
+            if (raycastHit.transform.TryGetComponent(out BaseCounter baseCounter)) { 
                 //clearCounter.Interact();
-                if (clearCounter != selectedCounter) { //kui ei ole juba selected siis nyyd on
-                    selectedCounter = clearCounter;
+                if (baseCounter != selectedCounter) { //kui ei ole juba selected siis nyyd on
+                    selectedCounter = baseCounter;
 
-                    SetSelectedCounter(clearCounter);
+                    SetSelectedCounter(baseCounter);
                 }
             }
             else {
@@ -143,7 +142,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent{
 
     }
 
-    private void SetSelectedCounter(ClearCounter selectedCounter) {
+    private void SetSelectedCounter(BaseCounter selectedCounter) {
         this.selectedCounter = selectedCounter;
 
 

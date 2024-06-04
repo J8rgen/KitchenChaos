@@ -1,0 +1,23 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class ContainerCounter : BaseCounter {
+
+    public event EventHandler OnplayerGrabbedObject;
+
+    [SerializeField] private KitchenObjectSO kitchenObjectSO;
+
+
+    public override void Interact(Player player) {
+        if (!HasKitchenObject()) { // so we dont spawn infinite objects
+            Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
+            kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+            OnplayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+
+}
