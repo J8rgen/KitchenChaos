@@ -12,9 +12,11 @@ public class ContainerCounter : BaseCounter {
 
 
     public override void Interact(Player player) {
-        if (!HasKitchenObject()) { // so we dont spawn infinite objects
+        if (!player.HasKitchenObject()) { 
+            //player is not carrying anything
             Transform kitchenObjectTransform = Instantiate(kitchenObjectSO.prefab);
             kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+
             OnplayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }
     }
