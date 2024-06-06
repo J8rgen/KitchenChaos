@@ -13,6 +13,12 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
         Debug.LogError("Basecounter.Interact();"); // should never trigger
     }
 
+
+    public virtual void InteractAlternate(Player player) { //for every function that we want the child classes to implement it  
+        Debug.LogError("Basecounter.InteracAlternatet();"); // should never trigger
+    }
+
+
     public Transform GetKitchenObjectFollowTransform() {
         return counterTopPoint;
     }
