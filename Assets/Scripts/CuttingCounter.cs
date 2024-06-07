@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class CuttingCounter : BaseCounter {
 
-    [SerializeField] private KitchenObjectSO cutKitchenObjectSO;
+    [SerializeField] private CuttingRecepeSO[] cuttingRecepeSOArray;
 
     public override void Interact(Player player) {
         if (!HasKitchenObject()) {
             //There is no KitchenObject here
             if (player.HasKitchenObject()) {
                 //Player is carrying sth
-                player.GetKitchenObject().SetKitchenObjectParent(this);
+                if (HasRecipeWithInput(player.GetKitchenObject().GetKitchenObjectSO())) {
+                    // Playter carrying something that can be cut
+                    player.GetKitchenObject().SetKitchenObjectParent(this);
+
+                }
             }
             else {
                 //Player has nothing
@@ -32,11 +36,32 @@ public class CuttingCounter : BaseCounter {
 
 
     public override void InteractAlternate(Player player) {
-        if( HasKitchenObject()) {
-            // If there is a KitchenObject
+        if( HasKitchenObject() && HasRecipeWithInput(GetKitchenObject().GetKitchenObjectSO())) {
+            // If there is a KitchenObject AND it can be cut
+            KitchenObjectSO outputKitchenObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectSO());
+
             GetKitchenObject().DestroySelf();
 
-            KitchenObject.SpawnKictchenObject(cutKitchenObjectSO, this);
+            KitchenObject.SpawnKictchenObject(outputKitchenObjectSO, this);
         }
+    }
+
+    private bool HasRecipeWithInput(KitchenObjectSO inputKitchenObjectSO) {
+        foreach (CuttingRecepeSO cuttingRecepeSO in cuttingRecepeSOArray) {
+            if (cuttingRecepeSO.input == inputKitchenObjectSO) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSO) {
+        foreach (CuttingRecepeSO cuttingRecepeSO in cuttingRecepeSOArray) {
+            if (cuttingRecepeSO.input == inputKitchenObjectSO) {
+                return cuttingRecepeSO.output;
+            }
+        }
+        return null;
     }
 }
