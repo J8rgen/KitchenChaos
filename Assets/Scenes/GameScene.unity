@@ -210,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3933982, y: -0.00000002739931, z: 0.000000011724181, w: 0.9193682}
+  m_LocalRotation: {x: 0.39339817, y: 1.4898952e-15, z: -5.094527e-16, w: 0.9193682}
   m_LocalPosition: {x: 0, y: 22, z: -21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -809,7 +809,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852308830}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3933982, y: -0.00000002739931, z: 0.000000011724181, w: 0.9193682}
+  m_LocalRotation: {x: 0.39339817, y: 1.4898952e-15, z: -5.094527e-16, w: 0.9193682}
   m_LocalPosition: {x: 0, y: 22, z: -21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -975,6 +975,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4953249551083508097, guid: 18c160c29a2498243a1c7eec98394098,
+        type: 3}
+      propertyPath: cuttingRecipeSOArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953249551083508097, guid: 18c160c29a2498243a1c7eec98394098,
+        type: 3}
+      propertyPath: cuttingRecipeSOArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a07c9d2a5dd7314e9b522f777f755ff,
+        type: 2}
+    - target: {fileID: 4953249551083508097, guid: 18c160c29a2498243a1c7eec98394098,
+        type: 3}
+      propertyPath: cuttingRecipeSOArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 489c2902f3c32284d9b8e86598fd59b7,
+        type: 2}
+    - target: {fileID: 4953249551083508097, guid: 18c160c29a2498243a1c7eec98394098,
+        type: 3}
+      propertyPath: cuttingRecipeSOArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: fbee1b44bb48b614bb6e4c25cccf0521,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
