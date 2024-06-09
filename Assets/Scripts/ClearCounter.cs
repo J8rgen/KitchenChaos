@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CuttingCounter;
 
 public class ClearCounter : BaseCounter { // monobehavior base class, interface
 
@@ -32,6 +34,10 @@ public class ClearCounter : BaseCounter { // monobehavior base class, interface
         }
     }
 
+
+    public override void InteractAlternate(Player player) { // I ADDED THIS 
+        //NOTHING 
+    }
 
 
 }

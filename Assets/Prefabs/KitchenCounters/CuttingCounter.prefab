@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 3522179294105831699}
   - component: {fileID: 4555816045829186627}
   - component: {fileID: 7573114495543452369}
+  - component: {fileID: 6586136123258381943}
   m_Layer: 5
   m_Name: ProgressBarUI
   m_TagString: Untagged
@@ -209,6 +210,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cuttingCounter: {fileID: 4953249551083508097}
   barImage: {fileID: 8266774995415010136}
+--- !u!114 &6586136123258381943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057052505029031942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f822bbe30fc99a145b58c9e891140c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5892274804385859489
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,10 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterTopPoint: {fileID: 1890755526509775381}
-  cuttingRecepeSOArray:
-  - {fileID: 11400000, guid: 6a07c9d2a5dd7314e9b522f777f755ff, type: 2}
-  - {fileID: 11400000, guid: 489c2902f3c32284d9b8e86598fd59b7, type: 2}
-  - {fileID: 11400000, guid: fbee1b44bb48b614bb6e4c25cccf0521, type: 2}
+  cuttingRecipeSOArray: []
 --- !u!4 &4950363699052398637 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3618023158041140685, guid: 1e27733c54f415e47b316a063190bf56,
