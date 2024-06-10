@@ -35,9 +35,4 @@ public class ClearCounter : BaseCounter { // monobehavior base class, interface
     }
 
 
-    public override void InteractAlternate(Player player) { // I ADDED THIS 
-        //NOTHING 
-    }
-
-
 }
