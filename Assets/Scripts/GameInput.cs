@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameInput : MonoBehaviour
-{
+public class GameInput : MonoBehaviour {
 
     public event EventHandler OnInteractAction;
     public event EventHandler OnInteractAlternateAction;
