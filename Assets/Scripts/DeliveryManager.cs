@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class DeliveryManager : MonoBehaviour {
 
+
+    public static DeliveryManager Instance { get; private set; }
+
+
     [SerializeField] private RecipeListSO recipeListSO;
     private List<RecipeSO> waitingRecipeSOList;
 
@@ -13,6 +17,8 @@ public class DeliveryManager : MonoBehaviour {
     private int waitingRecipeMax = 4;
 
     private void Awake() {
+        Instance = this;
+
         waitingRecipeSOList = new List<RecipeSO>();
     }
 
