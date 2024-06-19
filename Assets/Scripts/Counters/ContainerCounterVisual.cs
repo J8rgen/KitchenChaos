@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ContainerCounterVisual : MonoBehaviour {
 
-    private const string OPEN_CLOSE = "OpenClose";
+    private const string OPEN_CLOSE = "OpenClose"; // animator animation string 
 
     [SerializeField] private ContainerCounter containerCounter;
 
@@ -16,7 +16,7 @@ public class ContainerCounterVisual : MonoBehaviour {
 
 
     private void Start() {
-        containerCounter.OnplayerGrabbedObject += ContainerCounter_OnPlayerGrabbedObject;
+        containerCounter.OnplayerGrabbedObject += ContainerCounter_OnPlayerGrabbedObject; // subscription call
     }
 
     private void ContainerCounter_OnPlayerGrabbedObject(object sender, System.EventArgs e) {

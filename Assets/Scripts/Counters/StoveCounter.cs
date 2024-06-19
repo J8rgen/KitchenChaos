@@ -6,13 +6,17 @@ using static CuttingCounter;
 
 public class StoveCounter : BaseCounter, IHasProgress {
 
+
+
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
 
-    public event EventHandler<OnStateChangedEventArgs> OnStateChanged;
-    public class OnStateChangedEventArgs : EventArgs {
+
+    public event EventHandler<OnStateChangedEventArgs> OnStateChanged; // visuals, holds state
+    public class OnStateChangedEventArgs : EventArgs { // gets triggered whenever state changes 
         public State state;
     }
+
     public enum State {
         Idle,
         Frying,

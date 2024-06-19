@@ -7,7 +7,7 @@ public class DeliveryManagerUI : MonoBehaviour {
     [SerializeField] private Transform recipeTemplate;
 
     private void Awake() {
-        recipeTemplate.gameObject.SetActive(false);
+        recipeTemplate.gameObject.SetActive(false); // template off
     }
 
     private void Start() {
@@ -26,16 +26,17 @@ public class DeliveryManagerUI : MonoBehaviour {
     }
 
     private void UpdateVisual() {
-        foreach (Transform child in container) {
+
+        foreach (Transform child in container) { // destroy template copies, except template
             if (child == recipeTemplate) continue;
             Destroy(child.gameObject);
         }
 
-        foreach (RecipeSO recipeSO in DeliveryManager.Instance.GetWaintingRecipeSOList()) {
-            Transform recipeTransform = Instantiate(recipeTemplate, container);
-            recipeTransform.gameObject.SetActive(true);
+        foreach (RecipeSO recipeSO in DeliveryManager.Instance.GetWaintingRecipeSOList()) { //iterate list of waiting copies
+            Transform recipeTransform = Instantiate(recipeTemplate, container); //create visual recipe copy
+            recipeTransform.gameObject.SetActive(true); //set copy active
 
-            recipeTransform.GetComponent<DeliveryManagerSingleUI>().SetRecipeSO(recipeSO);
+            recipeTransform.GetComponent<DeliveryManagerSingleUI>().SetRecipeSO(recipeSO); // add right icons and so on
 
         }
     }

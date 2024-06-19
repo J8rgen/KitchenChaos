@@ -13,12 +13,13 @@ public class KitchenObject : MonoBehaviour{
     }
 
 
-    public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) { // when we set clear counter to a different one    
-        if (this.kitchenObjectParent != null) {
+    public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent) {   
+
+        if (this.kitchenObjectParent != null) { // Clear the kitchen object from the current parent, if it exists (like player for example)
             this.kitchenObjectParent.ClearKitchenObject();
         }
 
-        this.kitchenObjectParent = kitchenObjectParent; //CAREFUL HERE WITH OLD AND NEW CLEAR COUNTER
+        this.kitchenObjectParent = kitchenObjectParent; 
 
         if (kitchenObjectParent.HasKitchenObject()) {
             Debug.LogError("IKitchenObjectParent already has a KitchenObject");

@@ -26,15 +26,16 @@ public class ClearCounter : BaseCounter { // monobehavior base class, interface
             //there is a KitchenObject here.
             if(player.HasKitchenObject()) {
                 //player is carrying sth
-                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject)) {
+                if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject)) { // output of GetKitchenObject() into TryGetPlate
                     //Player is holding a plate
-                    if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO())) {
+
+                    if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO())) { // adding to plate
                         GetKitchenObject().DestroySelf();
                     }
                 }
                 else {
                     //player is not carrying plate but something else
-                    if (GetKitchenObject().TryGetPlate(out plateKitchenObject)) { // check kitchen counter
+                    if (GetKitchenObject().TryGetPlate(out plateKitchenObject)) { // check kitchen counter for plate
                         //counter is holding a plate 
                         if (plateKitchenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO())) {
                             player.GetKitchenObject() .DestroySelf(); // destroy what the player is carrying

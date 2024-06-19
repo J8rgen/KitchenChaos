@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class ContainerCounter : BaseCounter {
 
-    public event EventHandler OnplayerGrabbedObject;
+    public event EventHandler OnplayerGrabbedObject; // can subscribe to this
 
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
 
