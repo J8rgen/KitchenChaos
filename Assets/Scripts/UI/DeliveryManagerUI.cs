@@ -33,7 +33,7 @@ public class DeliveryManagerUI : MonoBehaviour {
         }
 
         foreach (RecipeSO recipeSO in DeliveryManager.Instance.GetWaintingRecipeSOList()) { //iterate list of waiting copies
-            Transform recipeTransform = Instantiate(recipeTemplate, container); //create visual recipe copy
+            Transform recipeTransform = Instantiate(recipeTemplate, container); //create recipe visualcopy
             recipeTransform.gameObject.SetActive(true); //set copy active
 
             recipeTransform.GetComponent<DeliveryManagerSingleUI>().SetRecipeSO(recipeSO); // add right icons and so on

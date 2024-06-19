@@ -8,9 +8,11 @@ public class SoundManager : MonoBehaviour {
 
     public static SoundManager instance {  get; private set; }
 
-
+    // hold references to audio clips
     [SerializeField] private AudioClipRefsSO audioClipRefsSO;
 
+
+    // Subscribe to events when the SoundManager starts
     private void Start() {
         DeliveryManager.Instance.OnRecipeSuccess += DeliveryManager_OnRecipeSuccess;
         DeliveryManager.Instance.OnRecipeFailed += DeliveryManager_OnRecipeFailed;
@@ -27,7 +29,9 @@ public class SoundManager : MonoBehaviour {
 
 
     private void TrashCounter_OnAnyObjectTrashed(object sender, System.EventArgs e) {
+        // Cast sender to TrashCounter to get the specific instance
         TrashCounter trashCounter = sender as TrashCounter;
+        // Play a sound from audioClipRefsSO using the trash audio clip at the trashCounter's position
         PlaySound(audioClipRefsSO.trash, trashCounter.transform.position);
     }
 
@@ -55,19 +59,24 @@ public class SoundManager : MonoBehaviour {
         PlaySound(audioClipRefsSO.deliverySuccess, deliveryCounter.transform.position);
     }
 
+    public void PlayFootstepSound(Vector3 position, float volume) {
+        // Play footstep sounds from audioClipRefsSO at the specified position
+        PlaySound(audioClipRefsSO.footstep, position, volume);
+    }
+
+
+    //####
+
 
     private void PlaySound(AudioClip audioClip, Vector3 position, float volume = 1f) {
+        // // Play a single audio clip at a specified position
         AudioSource.PlayClipAtPoint(audioClip, position, volume);
     }
 
     private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volume = 1f) {
+        //// Randomly select an audio clip from the array
         PlaySound(audioClipArray[Random.Range(0, audioClipArray.Length)], position, volume);
     }
 
-
-
-    public void PlayFootstepSound(Vector3 position, float volume) {
-        PlaySound(audioClipRefsSO.footstep, position, volume);
-    }
 
 }

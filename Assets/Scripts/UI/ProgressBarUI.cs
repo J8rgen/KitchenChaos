@@ -13,11 +13,16 @@ public class ProgressBarUI : MonoBehaviour {
     private IHasProgress hasProgress;
 
     private void Start () {
-        hasProgress = hasProgressGameObject.GetComponent<IHasProgress>();
-        if(hasProgress == null ) {
+        hasProgress = hasProgressGameObject.GetComponent<IHasProgress>(); // retrieves the IHasProgress from hasProgressGameObject
+
+        if (hasProgress == null ) {
             Debug.LogError("Game object" + hasProgressGameObject + "does not have a component that implements IHasProgress");
         }
+
+        //subscribe
         hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
+
+        // fill amount on progress bar and hide it 
         barImage.fillAmount = 0f;
         Hide();
     }

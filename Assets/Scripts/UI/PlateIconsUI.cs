@@ -8,12 +8,12 @@ public class PlateIconsUI : MonoBehaviour {
     [SerializeField] private Transform iconTemplate;
 
     private void Awake() {
-        iconTemplate.gameObject.SetActive(false);
+        iconTemplate.gameObject.SetActive(false); // template off
     }
 
 
     private void Start () {
-        plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
+        plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded; 
     }
 
 
@@ -24,15 +24,15 @@ public class PlateIconsUI : MonoBehaviour {
 
 
     private void UpdateVisual() {
-        foreach (Transform child in transform) {
+        foreach (Transform child in transform) { // destroy copies except template in the current transform
             if (child == iconTemplate) continue;
             Destroy(child.gameObject);
         }
 
         foreach (KitchenObjectSO kitchenObjectSO in plateKitchenObject.GetKitchenObjectSOList()) {
-            Transform iconTransform = Instantiate(iconTemplate, transform);
-            iconTransform.gameObject.SetActive(true);
-            iconTransform.GetComponent<PlateIconsSingleUI>().SetKitchenObjectSO(kitchenObjectSO);
+            Transform iconTransform = Instantiate(iconTemplate, transform); // create copy
+            iconTransform.gameObject.SetActive(true); // set active
+            iconTransform.GetComponent<PlateIconsSingleUI>().SetKitchenObjectSO(kitchenObjectSO); // set right icons on plate
         }
     }
 }

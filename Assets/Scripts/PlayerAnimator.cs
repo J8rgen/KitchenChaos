@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour{
 
-    private const string IS_WALKING = "IsWalking";
+    private const string IS_WALKING = "IsWalking";  // animation string
 
-    [SerializeField] private Player player;
+    [SerializeField] private Player player; // gameobject
 
     private Animator animator;
     private void Awake(){
@@ -17,7 +17,5 @@ public class NewBehaviourScript : MonoBehaviour{
     private void Update(){
         animator.SetBool(IS_WALKING, player.IsWalking());
     }
-
-
 
 }

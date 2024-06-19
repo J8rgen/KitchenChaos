@@ -5,13 +5,13 @@ using UnityEngine;
 public class LookAtCamera : MonoBehaviour{
 
     private enum Mode {
-        LookAt,
-        LookAtInverted,
-        CameraForward,
-        CameraForwardInverted,
+        LookAt, // Object will look at the camera
+        LookAtInverted, // Object will look away from the camera (inverted)
+        CameraForward, // align forward direction with the camera's forward direction
+        CameraForwardInverted, //align forward direction opposite to the camera's forward direction
     }
 
-    [SerializeField] private Mode mode;
+    [SerializeField] private Mode mode; // chose a mode
 
     private void LateUpdate() {
         switch (mode) {

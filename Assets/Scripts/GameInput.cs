@@ -5,24 +5,27 @@ using UnityEngine;
 
 public class GameInput : MonoBehaviour {
 
-    public event EventHandler OnInteractAction;
+    public event EventHandler OnInteractAction; 
     public event EventHandler OnInteractAlternateAction;
 
-
+    // Reference to player input actions from the new Input System
     private PlayerInputActions playerInputActions;
 
+
     private void Awake() {
+
+        // Initialize the playerInputActions object
         playerInputActions = new PlayerInputActions();
+        // Enable the player input actions
         playerInputActions.Player.Enable();
 
-        playerInputActions.Player.Interact.performed += Interact_performed; //performed event, interact_performed listener function
+        // Subscribe to the Interact action and InteractAlternate action events from PlayerInputActions
+        playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.InteraceAlternate.performed += InteractAlternate_performed;
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
-        OnInteractAction?.Invoke(this, EventArgs.Empty); // if there are subscribers same as following
-        //if (OnInteractAction != null) { // if there are subscribers
-        //    OnInteractAction(this, EventArgs.Empty);}
+        OnInteractAction?.Invoke(this, EventArgs.Empty); 
         
     }
 
