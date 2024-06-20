@@ -19,7 +19,7 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent {
 
     
     public virtual void InteractAlternate(Player player) { //for every function that we want the child classes to implement it  
-        Debug.Log("Basecounter.InteracAlternatet();"); // should never trigger (we override this)
+        //Debug.Log("Basecounter.InteracAlternatet();"); // should never trigger (we SHOULD override this)
     }
 
 

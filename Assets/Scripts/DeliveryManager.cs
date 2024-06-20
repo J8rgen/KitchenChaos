@@ -24,6 +24,8 @@ public class DeliveryManager : MonoBehaviour {
     private float spawnRecipeTimerMax = 4f; //max time value
     private int waitingRecipeMax = 4; //maximum number of waiting recipes
 
+    private int successfulRecipesAmount;
+
     private void Awake() {
         Instance = this;
 
@@ -79,6 +81,8 @@ public class DeliveryManager : MonoBehaviour {
                     // Player delivered the correct recipe
 
                     // Remove the matched recipe from the waiting list
+                    successfulRecipesAmount++;
+
                     waitingRecipeSOList.RemoveAt(i);
 
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty); // visual
@@ -101,6 +105,9 @@ public class DeliveryManager : MonoBehaviour {
     }
 
 
-
+    // Method to get the amount of successful recipes
+    public int GetSuccessfulRecipesAmount() {
+        return successfulRecipesAmount;
+    }
 
 }
