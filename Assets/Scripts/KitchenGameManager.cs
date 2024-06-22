@@ -8,7 +8,8 @@ public class KitchenGameManager : MonoBehaviour {
     public static KitchenGameManager Instance { get; private set; }
 
     public event EventHandler OnStateChanged; // state changes for UI visuals
-
+    public event EventHandler OnGamePaused;   //listen on GamePauseUI
+    public event EventHandler OnGameUnpaused; //listen on GamePauseUI
 
     private enum State {
         WaitingToStart,
@@ -23,12 +24,23 @@ public class KitchenGameManager : MonoBehaviour {
 
     private float gamePlayingTimer; 
     private float gamePlayingTimerMax = 30f;
+    private bool isGamePaused = false;
+
 
     private void Awake() {
 
         Instance = this; // Singleton instance
 
         state = State.WaitingToStart; // Initial state
+    }
+
+    private void Start() {
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+
+    }
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e) {
+        TogglePauseGame();
     }
 
     private void Update() {
@@ -99,6 +111,20 @@ public class KitchenGameManager : MonoBehaviour {
         // 1 - (...): Inverts the fraction, giving a value that starts at 0
     }
 
+
+
+    public void TogglePauseGame() {
+        isGamePaused = !isGamePaused;
+
+        if (isGamePaused ) {
+            Time.timeScale = 0f;
+            OnGamePaused?.Invoke(this, EventArgs.Empty );
+        }
+        else {
+            Time.timeScale = 1f;
+            OnGameUnpaused?.Invoke(this, EventArgs.Empty);
+        }
+    }
 
 
 }

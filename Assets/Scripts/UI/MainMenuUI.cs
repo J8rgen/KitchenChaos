@@ -19,6 +19,7 @@ public class MainMenuUI : MonoBehaviour {
             Application.Quit(); // Quit the application when the quit button is clicked
         }); // lambda (delegates)
 
+        Time.timeScale = 1f; // Needed for exiting to menu 
     }
 
 }

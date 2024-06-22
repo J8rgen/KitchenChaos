@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour {
 
+    public static GameInput Instance {  get; private set; }
+
     public event EventHandler OnInteractAction; 
     public event EventHandler OnInteractAlternateAction;
+    public event EventHandler OnPauseAction;
 
     // Reference to player input actions from the new Input System
     private PlayerInputActions playerInputActions;
@@ -14,14 +18,32 @@ public class GameInput : MonoBehaviour {
 
     private void Awake() {
 
+        Instance = this;
+
         // Initialize the playerInputActions object
         playerInputActions = new PlayerInputActions();
         // Enable the player input actions
         playerInputActions.Player.Enable();
 
-        // Subscribe to the Interact action and InteractAlternate action events from PlayerInputActions
+        // Subscribe to events from generated PlayerInputActions
         playerInputActions.Player.Interact.performed += Interact_performed;
         playerInputActions.Player.InteraceAlternate.performed += InteractAlternate_performed;
+        playerInputActions.Player.Pause.performed += Pause_perforemd;
+
+    }
+
+    
+    private void OnDestroy() {
+        // when this object is destroyed it will unsubscribe from those events
+        playerInputActions.Player.Interact.performed -= Interact_performed;
+        playerInputActions.Player.InteraceAlternate.performed -= InteractAlternate_performed;
+        playerInputActions.Player.Pause.performed -= Pause_perforemd;
+
+        playerInputActions.Dispose(); // free the object and clear memory
+    }
+
+    private void Pause_perforemd(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnPauseAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {

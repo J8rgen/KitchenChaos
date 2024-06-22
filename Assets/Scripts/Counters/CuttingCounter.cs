@@ -9,6 +9,10 @@ public class CuttingCounter : BaseCounter, IHasProgress {
 
     public static event EventHandler OnAnyCut; // for sounds
 
+    new public static void ResetStaticData() { // new so we dont get a warning
+        OnAnyCut = null;
+    }
+
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler OnCut; // for animation
 
@@ -64,6 +68,7 @@ public class CuttingCounter : BaseCounter, IHasProgress {
             cuttingProgress++;
 
             OnCut?.Invoke(this, EventArgs.Empty);
+            //Debug.Log(OnAnyCut.GetInvocationList().Length); // list functions that listen to this event
             OnAnyCut?.Invoke(this, EventArgs.Empty);
 
             CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
