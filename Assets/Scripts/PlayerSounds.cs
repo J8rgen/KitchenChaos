@@ -28,7 +28,7 @@ public class PlayerSounds : MonoBehaviour {
                 float volume = 2f; // Volume of the footstep sound
 
                 // Play the footstep sound at the player's current position
-                SoundManager.instance.PlayFootstepSound(player.transform.position, volume);
+                SoundManager.Instance.PlayFootstepSound(player.transform.position, volume);
             }
 
         }

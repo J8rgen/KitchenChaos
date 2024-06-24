@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
+    //for saving volume level
+    private const string PLAYER_PREFS_SOUND_EFFECTS_VOLUME = "SoundEffectsVolume";
 
-
-    public static SoundManager instance {  get; private set; }
+    public static SoundManager Instance {  get; private set; }
 
     // hold references to audio clips
     [SerializeField] private AudioClipRefsSO audioClipRefsSO;
+
+
+    private float volume = 1f; 
 
 
     // Subscribe to events when the SoundManager starts
@@ -23,7 +27,10 @@ public class SoundManager : MonoBehaviour {
     }
 
     private void Awake() {
-        instance = this;
+        Instance = this;
+
+        //used if there is no save data
+        volume = PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, 1f); 
     }
 
 
@@ -68,15 +75,30 @@ public class SoundManager : MonoBehaviour {
     //####
 
 
-    private void PlaySound(AudioClip audioClip, Vector3 position, float volume = 1f) {
-        // // Play a single audio clip at a specified position
-        AudioSource.PlayClipAtPoint(audioClip, position, volume);
-    }
-
+    //Calls the other PlaySound function if there are multipe audio clips
     private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volume = 1f) {
         //// Randomly select an audio clip from the array
         PlaySound(audioClipArray[Random.Range(0, audioClipArray.Length)], position, volume);
     }
 
+    private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 1f) {
+        // // Play a single audio clip at a specified position
+        AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier * volume);
+    }
 
+
+    public void ChangeVolume() {
+        volume += .1f;
+        if (volume > 1f) {
+            volume = 0f;
+        }
+
+        PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, volume);
+        PlayerPrefs.Save(); // Unity also does this automatically, failsafe
+    }
+
+
+    public float GetVolume() {
+        return volume;
+    }
 }
