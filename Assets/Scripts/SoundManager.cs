@@ -72,6 +72,12 @@ public class SoundManager : MonoBehaviour {
     }
 
 
+    public void PlayCountdownSound() {
+        // Play footstep sounds from audioClipRefsSO at the specified position
+        PlaySound(audioClipRefsSO.warning, Vector3.zero); // warning base sound
+    }
+
+
     //####
 
 
