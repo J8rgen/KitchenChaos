@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StoveBurnWarningUI : MonoBehaviour {
+    // warning sprite
 
     [SerializeField] private StoveCounter stoveCounter;
 

@@ -77,6 +77,11 @@ public class SoundManager : MonoBehaviour {
         PlaySound(audioClipRefsSO.warning, Vector3.zero); // warning base sound
     }
 
+    public void PlayWarningSound(Vector3 position) {
+        // Play footstep sounds from audioClipRefsSO at the specified position
+        PlaySound(audioClipRefsSO.warning, position); // warning base sound
+    }
+
 
     //####
 
